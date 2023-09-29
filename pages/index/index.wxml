@@ -1,0 +1,35 @@
+<!--pages/userPhoto/userPhoto.wxml-->
+<view class="{{ isiPhoneX ? 'isIPx' : '' }}">
+<image class='background' src="/status/image/1.png" mode="aspectFill"></image>
+  <view class="hearder">
+  <view style="width: 100%;height:230rpx;"></view>
+    <view class="hearder-mainView">
+      <image wx:if="{{!hasUserInfo}}" bindtap="tapSelectUserClick" class="add-photo" src="../../status/image/adduser.png"></image>
+      <block wx:else>
+          <canvas canvas-id="getImg"></canvas>
+          <image  wx:if="{{!new_showuserImage}}" class="user-photo" src="{{userImage}}" mode="scaleToFill"></image>
+          <block  wx:else>
+           <image  class="user-photo" src="{{new_userImage}}" mode="scaleToFill"></image>
+          </block>
+      </block>
+    </view>
+    <button type="primary" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar" style="width: 60%;height: 80rpx;border-radius: 20rpx;margin-bottom: 40rpx;margin-top: -20rpx;">快速使用微信头像</button>
+    <view style="font-size: 40rpx;color: white;padding-bottom: 20rpx;">左划选取您中意的头像边框</view>
+    <view class="bjphoto_view">
+      <scroll-view scroll-x="true" class="photo_bj" >
+       <view style='display: inline-block;' wx:for='{{photo_bj_num}}' wx:key='{{item}}' wx:for-index='idx'>
+            <image class="photo_bj_img" src='{{item}}' bindtap='bigimg'mode="scaleToFill" data-item="{{idx}}"></image>
+            <i class='iconfont icon-ai54' bindtap='delimg' ></i>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="hearder-button">
+        <button  type="default" bindtap="editClick">重置</button>
+        <button  type="default" bindtap="saveloadFile">保存头像</button>
+      </view>
+  </view>
+</view>
+<view>
+<view>方式一：点击白色区域，从手机相册内上传照片（原图不失真）</view>
+<view>方式二：点击“快速使用微信头像”（画面被压缩）</view>
+</view>
